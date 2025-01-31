@@ -13,7 +13,7 @@ from mongoengine import connect
 connect(host = db_url)
 
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -45,6 +45,15 @@ async def create_point(point: PointModel):
 async def get_point(point_id:str):
     point = Point.objects(id=point_id).first()
     return point
+
+@app.put("/point/{point_id}")
+async def get_point(point_id:str,point: PointModel):
+    point_doc = Point.objects(id=point_id).first()
+    if point_doc:
+        point_doc.update(name=point.name, description=point.description, coordinates=point.location)
+        return point_doc.to_json()
+    else:
+        raise HTTPException(status_code=404, detail="Point not found")@app.get("/points")
 
 @app.get("/points")
 async def get_points(start:int=0,end:int=100):

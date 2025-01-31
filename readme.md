@@ -24,6 +24,10 @@ I used `Python's FastAPI` for developing the Backend server and Use `MongoDB` fo
 - Request at endpoint `/point` with document id.
 - This will return a Point.
 
+#### **Put-Point**
+- Pass the Point model as request body to the endpoint `/point` with document id.
+- This will return updated Point document.
+
 #### **GET-Points**
 - Request at endpoint `/points` with range query parameters such as start and end .
 - This will return list of Points.
