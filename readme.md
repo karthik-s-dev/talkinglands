@@ -26,4 +26,8 @@ I used `Python's FastAPI` for developing the Backend server and Use `MongoDB` fo
 
 #### **GET-Points(bounding box query)**
 - Request at endpoint `/points/bounding_box` with coordinates for a bounding box such as north, south, east and west.
-- This will return list of Points.
+- This will return list of Points within the Bounding box.
+
+#### **GET-Points(Radius query)**
+- Request at endpoint `/points/radius` with latitude, longitude and Radius.
+- This will return list of Points within radius.

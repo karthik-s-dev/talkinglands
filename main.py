@@ -52,3 +52,8 @@ async def get_points_within_bbox(north: float, south: float, east: float, west: 
         location_marker__geo_within_box=[(west, south), (east, north)]
     )
     return [json.loads(point.to_json()) for point in points]
+
+@app.get("/points/radius")
+async def get_points_within_radius(longitude: float, latitude: float, max_distance: float = 1000):
+    points = Point.objects(location__near=[longitude, latitude], location__max_distance=max_distance)
+    return [json.loads(point.to_json()) for point in points]
