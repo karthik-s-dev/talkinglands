@@ -45,3 +45,10 @@ async def create_point(point: PointModel):
 async def get_points(start:int=0,end:int=100):
     points = Point.objects().skip(start).limit(end - start)
     return [json.loads(point.to_json()) for point in points]
+
+@app.get("/points/bounding_box")
+async def get_points_within_bbox(north: float, south: float, east: float, west: float):
+    points = Point.objects(
+        location_marker__geo_within_box=[(west, south), (east, north)]
+    )
+    return [json.loads(point.to_json()) for point in points]

@@ -23,3 +23,7 @@ I used `Python's FastAPI` for developing the Backend server and Use `MongoDB` fo
 #### **GET-Points**
 - Request at endpoint `/points` with range query parameters such as start and end .
 - This will return list of Points.
+
+#### **GET-Points(bounding box query)**
+- Request at endpoint `/points/bounding_box` with coordinates for a bounding box such as north, south, east and west.
+- This will return list of Points.
