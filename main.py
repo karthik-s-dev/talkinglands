@@ -41,6 +41,11 @@ async def create_point(point: PointModel):
     point.save()
     return point.to_json()
 
+@app.get("/point/{point_id}")
+async def get_point(point_id:str):
+    point = Point.objects(id=point_id).first()
+    return point
+
 @app.get("/points")
 async def get_points(start:int=0,end:int=100):
     points = Point.objects().skip(start).limit(end - start)
