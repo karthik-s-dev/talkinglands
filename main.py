@@ -33,9 +33,15 @@ def test():
 
 from pydantic_models import PointModel
 from mongo_models import Point
+import json
 
 @app.post("/point")
 async def create_point(point: PointModel):
     point = Point(name=point.name, description=point.description, location=point.location)
     point.save()
     return point.to_json()
+
+@app.get("/points")
+async def get_points(start:int=0,end:int=100):
+    points = Point.objects().skip(start).limit(end - start)
+    return [json.loads(point.to_json()) for point in points]
