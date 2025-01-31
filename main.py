@@ -11,3 +11,23 @@ except KeyError:
 
 from mongoengine import connect
 connect(host = db_url)
+
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+
+
+@app.get("/")
+def test():
+    return {"message":"Running good :)"}
