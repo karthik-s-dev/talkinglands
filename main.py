@@ -26,8 +26,16 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-
-
 @app.get("/")
 def test():
     return {"message":"Running good :)"}
+
+
+from pydantic_models import PointModel
+from mongo_models import Point
+
+@app.post("/point")
+async def create_point(point: PointModel):
+    point = Point(name=point.name, description=point.description, location=point.location)
+    point.save()
+    return point.to_json()

@@ -15,3 +15,7 @@ I used `Python's FastAPI` for developing the Backend server and Use `MongoDB` fo
     2. description - String
     3. location - list(float) --> longitude first, latitude second
 
+# APIs
+#### **POST-Point**
+    Pass the Point model as request body to the endpoint `/point`.
+    This will create the new Point document. 
