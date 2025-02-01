@@ -108,3 +108,11 @@ This document provides a comprehensive guide on how to interact with the Talking
   - `201 Created`: Polygon created successfully.
   - `500 Failed to save polygon`: Invalid data provided.
 
+### GET /polygon/{polygon_id}
+
+- **Description**: Retrieves a polygon by its document ID.
+- **Path Parameters**:
+  - `id`: UUID (The ID of the polygon document)
+- **Responses**:
+  - `200 OK`: Successfully retrieved polygon.
+  - `404 Not Found`: No polygon found with the given ID.

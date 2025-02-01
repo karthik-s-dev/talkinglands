@@ -41,13 +41,13 @@ import json
 async def create_point(point: PointModel):
     point = Point(name=point.name, description=point.description, location=point.location)
     point.save()
-    return point.to_json()
+    return json.loads(point.to_json())
 
 @app.get("/point/{point_id}")
 async def get_point(point_id:str):
     point = Point.objects(id=point_id).first()
     if point:
-        return point.to_json()
+        return json.loads(point.to_json())
     else:
         raise HTTPException(status_code=404, detail="Point not found")
 
@@ -56,7 +56,7 @@ async def put_point(point_id:str,point: PointModel):
     point_doc = Point.objects(id=point_id).first()
     if point_doc:
         point_doc.update(name=point.name, description=point.description, location=point.location)
-        return point_doc.to_json()
+        return json.loads(point_doc.to_json())
     else:
         raise HTTPException(status_code=404, detail="Point not found")
 
@@ -114,3 +114,10 @@ def create_polygon(polygon: PolygonModel):
         return json.loads(polygon_doc.to_json())
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to save polygon: {str(e)}")
+
+@app.get("/polygon/{polygon_id}")
+def get_polygon(polygon_id: str):
+    polygon = Polygon.objects(id=polygon_id).first()
+    if not polygon:
+        raise HTTPException(status_code=404, detail="Polygon not found")
+    return json.loads(polygon.to_json())
