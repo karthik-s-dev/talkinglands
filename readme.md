@@ -145,3 +145,15 @@ This document provides a comprehensive guide on how to interact with the Talking
   - `end`: Integer (Pagination end index)
 - **Responses**:
   - `200 OK`: List of polygons returned successfully.
+
+
+### GET /polygons/bounding_box
+
+- **Description**: Retrieves polygons within a specified bounding box.
+- **Query Parameters**:
+  - `north`: Float (Northern latitude of the bounding box)
+  - `south`: Float (Southern latitude of the bounding box)
+  - `east`: Float (Eastern longitude of the bounding box)
+  - `west`: Float (Western longitude of the bounding box)
+- **Responses**:
+  - `200 OK`: List of polygons within the bounding box returned successfully.

@@ -150,3 +150,11 @@ def delete_polygon(polygon_id: str):
 def get_all_polygons(start: int = 0, end: int = 100):
     polygons = Polygon.objects().skip(start).limit(end - start)
     return [json.loads(polygon.to_json()) for polygon in polygons]
+
+
+@app.get("/polygons/bounding_box")
+def get_polygons_in_bbox(north: float, south: float, east: float, west: float):
+    polygons = Polygon.objects(
+        coordinates__geo_within_box=[(west, south), (east, north)]
+    )
+    return [json.loads(polygon.to_json()) for polygon in polygons]
