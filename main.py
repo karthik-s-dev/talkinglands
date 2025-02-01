@@ -121,3 +121,20 @@ def get_polygon(polygon_id: str):
     if not polygon:
         raise HTTPException(status_code=404, detail="Polygon not found")
     return json.loads(polygon.to_json())
+
+@app.put("/polygon/{polygon_id}")
+def update_polygon(polygon_id: str, polygon: PolygonModel):
+    polygon_doc = Polygon.objects(id=polygon_id).first()
+    if not polygon_doc:
+        raise HTTPException(status_code=404, detail="Polygon not found")
+    try:
+        polygon_doc.update(
+            name=polygon.name,
+            description=polygon.description,
+            coordinates=polygon.coordinates
+        )
+        return {"message": "Polygon updated successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to update polygon: {str(e)}")
+    
+

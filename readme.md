@@ -116,3 +116,14 @@ This document provides a comprehensive guide on how to interact with the Talking
 - **Responses**:
   - `200 OK`: Successfully retrieved polygon.
   - `404 Not Found`: No polygon found with the given ID.
+
+### PUT /polygon/{id}
+
+- **Description**: Updates an existing polygon document.
+- **Path Parameters**:
+  - `id`: UUID (The ID of the polygon document)
+- **Request Body**: `Polygon` model.
+- **Responses**:
+  - `200 OK`: Polygon updated successfully.
+  - `404 Not Found`: No point found with the given ID.
+  - `500 Failed to update polygon`: Invalid data provided.
