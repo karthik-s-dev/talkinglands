@@ -17,3 +17,11 @@ class Polygon(Document):
     name = StringField(required=True)
     description = StringField()
     coordinates = PolygonField()
+
+    meta = {
+        'indexes': [
+            {
+                'fields': ['$coordinates'],  # The '$' prefix tells MongoEngine to use a 2dsphere index
+            }
+        ]
+    }

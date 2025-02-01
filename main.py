@@ -31,8 +31,8 @@ def test():
     return {"message":"Running good :)"}
 
 
-from pydantic_models import PointModel
-from mongo_models import Point
+from pydantic_models import PointModel, PolygonModel
+from mongo_models import Point, Polygon
 import json
 
 
@@ -101,3 +101,16 @@ async def get_points_within_radius(longitude: float, latitude: float, max_distan
 
 ########  POLYGON APIs #############
 
+
+@app.post("/polygon")
+def create_polygon(polygon: PolygonModel):
+    try:
+        polygon_doc = Polygon(
+            name=polygon.name,
+            description=polygon.description,
+            coordinates=polygon.coordinates
+        )
+        polygon_doc.save()
+        return json.loads(polygon_doc.to_json())
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save polygon: {str(e)}")
