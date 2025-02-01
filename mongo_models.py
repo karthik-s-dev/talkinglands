@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, PointField
+from mongoengine import Document, StringField, PointField, PolygonField
 
 class Point(Document):
     name = StringField(required=True)
@@ -12,3 +12,8 @@ class Point(Document):
             }
         ]
     }
+
+class Polygon(Document):
+    name = StringField(required=True)
+    description = StringField()
+    coordinates = PolygonField()

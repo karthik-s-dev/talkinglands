@@ -35,6 +35,8 @@ from pydantic_models import PointModel
 from mongo_models import Point
 import json
 
+
+########  POINTS APIs #############
 @app.post("/point")
 async def create_point(point: PointModel):
     point = Point(name=point.name, description=point.description, location=point.location)
@@ -83,3 +85,19 @@ async def get_points_within_bbox(north: float, south: float, east: float, west: 
 async def get_points_within_radius(longitude: float, latitude: float, max_distance: float = 1000):
     points = Point.objects(location__near=[longitude, latitude], location__max_distance=max_distance)
     return [json.loads(point.to_json()) for point in points]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########  POLYGON APIs #############
+
