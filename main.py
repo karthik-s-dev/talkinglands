@@ -44,18 +44,21 @@ async def create_point(point: PointModel):
 @app.get("/point/{point_id}")
 async def get_point(point_id:str):
     point = Point.objects(id=point_id).first()
-    return point
+    if point:
+        return point.to_json()
+    else:
+        raise HTTPException(status_code=404, detail="Point not found")
 
 @app.put("/point/{point_id}")
 async def put_point(point_id:str,point: PointModel):
     point_doc = Point.objects(id=point_id).first()
     if point_doc:
-        point_doc.update(name=point.name, description=point.description, coordinates=point.location)
+        point_doc.update(name=point.name, description=point.description, location=point.location)
         return point_doc.to_json()
     else:
         raise HTTPException(status_code=404, detail="Point not found")
 
-@app.delte("/point/{point_id}")
+@app.delete("/point/{point_id}")
 async def delete_point(point_id:str):
     point_doc = Point.objects(id=point_id).first()
     if point_doc:
