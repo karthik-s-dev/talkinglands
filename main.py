@@ -145,3 +145,8 @@ def delete_polygon(polygon_id: str):
         raise HTTPException(status_code=404, detail="Polygon not found")
     polygon_doc.delete()
     return {"message": "Polygon deleted successfully"}
+
+@app.get("/polygons")
+def get_all_polygons(start: int = 0, end: int = 100):
+    polygons = Polygon.objects().skip(start).limit(end - start)
+    return [json.loads(polygon.to_json()) for polygon in polygons]

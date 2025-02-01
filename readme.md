@@ -136,3 +136,12 @@ This document provides a comprehensive guide on how to interact with the Talking
 - **Responses**:
   - `200 OK`: Polygon deleted successfully.
   - `404 Not Found`: No polygon found with the given ID.
+
+### GET /polygons
+
+- **Description**: Retrieves a list of polygons.
+- **Query Parameters**:
+  - `start`: Integer (Pagination start index)
+  - `end`: Integer (Pagination end index)
+- **Responses**:
+  - `200 OK`: List of polygons returned successfully.
