@@ -158,3 +158,11 @@ def get_polygons_in_bbox(north: float, south: float, east: float, west: float):
         coordinates__geo_within_box=[(west, south), (east, north)]
     )
     return [json.loads(polygon.to_json()) for polygon in polygons]
+
+@app.get("/polygons/radius")
+def get_polygons_radius(longitude: float, latitude: float, max_distance: float = 1000):
+    polygons = Polygon.objects(
+        coordinates__near=[longitude, latitude],
+        coordinates__max_distance=max_distance
+    )
+    return [json.loads(polygon.to_json()) for polygon in polygons]

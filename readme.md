@@ -157,3 +157,13 @@ This document provides a comprehensive guide on how to interact with the Talking
   - `west`: Float (Western longitude of the bounding box)
 - **Responses**:
   - `200 OK`: List of polygons within the bounding box returned successfully.
+
+### GET /polygons/radius
+
+- **Description**: Retrieves polygons within a specified radius.
+- **Query Parameters**:
+  - `latitude`: Float (Central latitude of the search area)
+  - `longitude`: Float (Central longitude of the search area)
+  - `radius`: Float (Radius in meters)
+- **Responses**:
+  - `200 OK`: List of polygons within the radius returned successfully.
