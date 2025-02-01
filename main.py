@@ -39,8 +39,11 @@ import json
 ########  POINTS APIs #############
 @app.post("/point")
 async def create_point(point: PointModel):
-    point = Point(name=point.name, description=point.description, location=point.location)
-    point.save()
+    try:
+        point = Point(name=point.name, description=point.description, location=point.location)
+        point.save()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save Point: {str(e)}")
     return json.loads(point.to_json())
 
 @app.get("/point/{point_id}")
@@ -56,7 +59,7 @@ async def put_point(point_id:str,point: PointModel):
     point_doc = Point.objects(id=point_id).first()
     if point_doc:
         point_doc.update(name=point.name, description=point.description, location=point.location)
-        return json.loads(point_doc.to_json())
+        return {"message": "Point updated successfully"}
     else:
         raise HTTPException(status_code=404, detail="Point not found")
 
@@ -77,7 +80,7 @@ async def get_points(start:int=0,end:int=100):
 @app.get("/points/bounding_box")
 async def get_points_within_bbox(north: float, south: float, east: float, west: float):
     points = Point.objects(
-        location_marker__geo_within_box=[(west, south), (east, north)]
+        location__geo_within_box=[(west, south), (east, north)]
     )
     return [json.loads(point.to_json()) for point in points]
 

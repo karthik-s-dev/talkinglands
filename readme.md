@@ -2,6 +2,26 @@
 
 This document provides a comprehensive guide on how to interact with the Talking Lands backend server, which is developed using Python's FastAPI and utilizes MongoDB as a spatial database for handling and storing geospatial data.
 
+#### How to Run the Application
+
+1. **Clone the Repository**  
+   Clone this repository to your local machine using:
+
+   `git clone https://github.com/karthik-s-dev/talkinglands.git`
+
+2. Ensure **Python** is Installed
+3. Create and Activate a Virtual Environment
+
+  `python -m venv venv`
+  `venv\Scripts\activate`
+
+4. Install Dependencies
+
+  `pip install -r requirements.txt`
+
+5. Update the **.env** File
+6. Run the Application
+  `uvicorn main:app`
 ## MongoDB Schemas
 
 ### Point Collection
@@ -38,7 +58,8 @@ This document provides a comprehensive guide on how to interact with the Talking
 - **Request Body**: `Point` model.
 - **Responses**:
   - `201 Created`: Point created successfully.
-  - `400 Bad Request`: Invalid data provided.
+  - `400 Bad Request`: Invalid data provided.  
+  - `500 Failed to update point`: Invalid data provided.
 
 ### GET /point/{id}
 
