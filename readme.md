@@ -127,3 +127,12 @@ This document provides a comprehensive guide on how to interact with the Talking
   - `200 OK`: Polygon updated successfully.
   - `404 Not Found`: No point found with the given ID.
   - `500 Failed to update polygon`: Invalid data provided.
+
+### DELETE /polygon/{id}
+
+- **Description**: Deletes a polygon by its document ID.
+- **Path Parameters**:
+  - `id`: UUID (The ID of the polygon document)
+- **Responses**:
+  - `200 OK`: Polygon deleted successfully.
+  - `404 Not Found`: No polygon found with the given ID.

@@ -138,3 +138,10 @@ def update_polygon(polygon_id: str, polygon: PolygonModel):
         raise HTTPException(status_code=500, detail=f"Failed to update polygon: {str(e)}")
     
 
+@app.delete("/polygon/{polygon_id}")
+def delete_polygon(polygon_id: str):
+    polygon_doc = Polygon.objects(id=polygon_id).first()
+    if not polygon_doc:
+        raise HTTPException(status_code=404, detail="Polygon not found")
+    polygon_doc.delete()
+    return {"message": "Polygon deleted successfully"}
